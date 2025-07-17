@@ -1,46 +1,43 @@
-name: VC6toVS2022
+名称：VC6到VS2022
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+在请将以下网页文本翻译成中文，只输出翻译结果，不输出任何其他解释，若文本已经是中文了，则直接用中文复述一遍。翻译结果保持格式不变。输入：请将以下网页文本翻译成中文，只输出翻译结果，不输出任何其他解释，若文本已经是中文了，则直接用中文复述一遍。翻译结果保持格式不变。输入：请将以下网页文本翻译成中文，只输出翻译结果，不输出任何其他解释，若文本已经是中文了，则直接用中文复述一遍。翻译结果保持格式不变。输入：请将以下网页文本翻译成中文，只输出翻译结果，不输出任何其他解释，若文本已经是中文了，则直接用中文复述一遍。翻译结果保持格式不变。输入：:
+  推:
+    分支：
+      - 主页
+  拉取请求:
+    分支：
+      - 主页
 
-jobs:
-  convert:
-    runs-on: windows-latest
+工作：
+  转换:
+    运行于：Windows-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    步骤：
+      - 名称: 结账代码
+        使用：actions/checkout@v3
 
-      - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@v1.3.1
+      - 名称: 设置 Visual Studio 开发环境
+        运行： |
+          调用 "D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
+          echo 当前目录：$(cd)
 
-      - name: Install CMake
-        uses: lukka/get-cmake@latest
-
-      - name: Install Visual Studio Build Tools
-        uses: microsoft/setup-msbuild@v1.3.1
-
-      - name: Upgrade VC6 Projects
-        run: |
-          echo "Upgrading VC6 projects to VS2022..."
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
-          cd "VC6.0马里奥/新建文件夹"
+      - 名称: 将VC6项目升级到VS2022
+        运行： |
+          cd /d "D:\gh\VC6.0toVS2022-main\VC6.0马里奥\新建文件夹"
+          echo 正在升级 mario01.dsp...
           devenv.com /upgrade "mario01.dsp"
-          devenv.com /upgrade "mario01.dsw"
+          echo 正在升级 mario01.dsw...
+          devenv.com /upgrade “mario01.dsw”
 
-      - name: Build upgraded projects
-        run: |
-          msbuild /p:Configuration=Release /p:Platform=x64 "VC6.0马里奥/新建文件夹/mario01.vcxproj"
+      - 名称: 建设项目
+        运行： |
+          cd /d "D:\gh\VC6.0toVS2022-main\VC6.0马里奥\新建文件夹"
+          msbuild /p:Configuration=Release /p:Platform=x64 "mario01.vcxproj"
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: BuildArtifacts
-          path: |
-            VC6.0马里奥/新建文件夹/Debug/
-            VC6.0马里奥/新建文件夹/Release/
+      - 名称：上传构建产物
+        使用：actions/upload-artifact@v3
+        与：
+          名称：构建工件
+          路径: |
+            D:\gh\VC6.0toVS2022-main\VC6.0马里奥\新建文件夹\Release\
+            D:\gh\VC6.0toVS2022-main\VC6.0马里奥\新建文件夹\Debug\
