@@ -2,7 +2,7 @@
 设置本地环境并启用延迟扩展
 
 REM 设置VS2022开发人员命令提示符环境
-调用 "D:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
+调用 "D:\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
 
 REM 设置GitHub仓库路径
 设置 repoPath="D:\gh\VC6.0toVS2022-main"
